@@ -18,7 +18,7 @@ process markDuplicates {
 
     script:
 """ 
-/gatk/gatk --java-options \"-Xms4g -Xmx4g  -XX:+UseSerialGC\" 
+/gatk/gatk --java-options \"-Xms4g -Xmx4g  -XX:+UseSerialGC\" \\
   MarkDuplicates \\
   -I ${cram_file_sorted} \\
   -O ${cram_file_sorted}.dups \\
