@@ -23,7 +23,7 @@ process markDuplicates {
   -I ${cram_file_sorted} \\
   -O ${cram_file_sorted}.dups \\
   --METRICS_FILE ${cram_file_sorted}.dups.metrics \\
-  -R /ref/hs38DH.fa \\
+  -R ${params.ref_dir}/${params.ref_file} \\
   --VALIDATION_STRINGENCY SILENT \\
   --OPTICAL_DUPLICATE_PIXEL_DISTANCE 2500 \\
   --ASSUME_SORT_ORDER \"queryname\" \\
