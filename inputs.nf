@@ -4,16 +4,18 @@ params {
     // e.g:
     // sample	object	object_index
     //PD42171b	/lustre/path_to/PD42171b.sample.dupmarked.bam	/lustre/path_to/PD42171b.sample.dupmarked.bam.bai
-    tsv_file = "/lustre/scratch118/humgen/hgi/users/mercury/scratch/dv_pipeline/input_bams.txt"
+    tsv_file = "${projectDir}/../../input_bams.tsv"
 
     // how many samples from input tsv file to process
     // -1 for all samples 
     samples_to_process = -1
     
     ref_dir = "/lustre/scratch118/humgen/resources/ref/Homo_sapiens/HS38DH"
+    // path to genome ref file, relative to ref_dir/
     ref_file = "hs38DH.fa"
 
     bed_dir = "/lustre/scratch118/humgen/resources/exome/Homo_sapiens"
+    // path to bed files, relative to bed_dir/
     bed_file_deepvariant = "Twist/Twist_Human_Core_Exome_BI-CTR_padded_merged.bed"
     bed_file_gatk = "Twist/Twist_Human_Core_Exome_BI-CTR_padded_merged.interval_list"
 	
