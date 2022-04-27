@@ -38,7 +38,7 @@ workflow {
         deepvariant(coord_sort_cram.out.markdup_sample_cram_crai)
         gatk_haplotypecaller(coord_sort_cram.out.markdup_sample_cram_crai)
     }
-    else if (params.run_mode == "sort_inputs") {
+    else if (params.run_mode == "no_remap_no_sort") {
         deepvariant(channel_inputs_bams)
         gatk_haplotypecaller(channel_inputs_bams)
     }
