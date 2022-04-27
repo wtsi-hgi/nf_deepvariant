@@ -5,7 +5,6 @@ process bam_to_cram {
     publishDir path: "${params.outdir}/bam_to_cram/",
 	mode: "${params.copy_mode}",
 	overwrite: "true"
-    publishDir "${params.cram_output_dir}", mode: "${params.copy_mode}"
 
     when:
     params.run_coord_sort_cram
