@@ -94,9 +94,12 @@
             ],
             "properties": {
                 "run_mode": {
-                    "type": "string",
+                    "type": "array",
                     "default": "sort_inputs",
-                    "enum": ["remap_inputs", "sort_inputs", "no_remap_no_sort"],
+                    "items":{
+                        "type": "string",
+                        "enum": ["remap_inputs", "sort_inputs", "no_remap_no_sort"]
+                    },
                     "help_text": "must be one of\n\n\"remap_inputs\" \"sort_inputs\" \"no_remap_no_sort\""
                 },
                 "run_markDuplicates": {
