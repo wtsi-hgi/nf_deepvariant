@@ -89,17 +89,11 @@
             "type": "object",
             "fa_icon": "fas fa-file-import",
             "description": "Less common options for the pipeline, herer it can be defined which steps to run",
-            "required": [
-                "run_mode"
-            ],
             "properties": {
                 "run_mode": {
-                    "type": "array",
+                    "type": "string",
                     "default": "sort_inputs",
-                    "items":{
-                        "type": "string",
-                        "enum": ["remap_inputs", "sort_inputs", "no_remap_no_sort"]
-                    },
+                    "enum": ["remap_inputs", "sort_inputs", "no_remap_no_sort"],
                     "help_text": "must be one of\n\n\"remap_inputs\" \"sort_inputs\" \"no_remap_no_sort\""
                 },
                 "run_markDuplicates": {
