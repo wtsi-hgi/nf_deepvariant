@@ -89,6 +89,9 @@
             "type": "object",
             "fa_icon": "fas fa-file-import",
             "description": "Less common options for the pipeline, herer it can be defined which steps to run",
+            "required": [
+                "run_mode"
+            ],
             "properties": {
                 "run_mode": {
                     "type": "string",
