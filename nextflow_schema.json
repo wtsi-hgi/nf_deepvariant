@@ -91,7 +91,6 @@
             "description": "Less common options for the pipeline, herer it can be defined which steps to run",
             "properties": {
                 "run_mode": {
-                    "type": "string",
                     "default": "sort_inputs",
                     "ItemModList": ["remap_inputs", "sort_inputs", "no_remap_no_sort"],
                     "help_text": "must be one of\n\n\"remap_inputs\" \"sort_inputs\" \"no_remap_no_sort\""
