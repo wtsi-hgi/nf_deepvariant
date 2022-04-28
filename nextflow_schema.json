@@ -26,7 +26,9 @@
                 },
                 "ref_dir": {
                     "type": "string",
-                    "default": "/lustre/scratch118/humgen/resources/ref/Homo_sapiens/HS38DH"
+                    "format": "directory-path",
+                    "default": "/lustre/scratch118/humgen/resources/ref/Homo_sapiens/HS38DH",
+                    "fa_icon": "fas fa-folder-open"
                 },
                 "ref_file": {
                     "type": "string",
@@ -35,6 +37,7 @@
                 },
                 "bed_dir": {
                     "type": "string",
+                    "format": "directory-path",
                     "default": "/lustre/scratch118/humgen/resources/exome/Homo_sapiens"
                 },
                 "bed_file_deepvariant": {
@@ -55,7 +58,9 @@
                 },
                 "reportdir": {
                     "type": "string",
-                    "default": "/Users/en6/projects/nf_deep/reports"
+                    "format": "directory-path",
+                    "default": "/Users/en6/projects/nf_deep/reports",
+                    "fa_icon": "fas fa-folder-open"
                 }
             }
         },
@@ -83,12 +88,12 @@
             "title": "Generic options",
             "type": "object",
             "fa_icon": "fas fa-file-import",
-            "description": "Less common options for the pipeline, typically set in a config file.",
-            "help_text": "These options are common to all nf-core pipelines and allow you to customise some of the core preferences for how the pipeline runs.\n\nTypically these options would be set in a Nextflow config file loaded for all pipeline runs, such as `~/.nextflow/config`.",
+            "description": "Less common options for the pipeline, herer it can be defined which steps to run",
             "properties": {
                 "run_mode": {
                     "type": "string",
                     "default": "sort_inputs",
+                    "ItemModList": ["remap_inputs", "sort_inputs", "no_remap_no_sort"],
                     "help_text": "must be one of\n\n\"remap_inputs\" \"sort_inputs\" \"no_remap_no_sort\""
                 },
                 "run_markDuplicates": {
