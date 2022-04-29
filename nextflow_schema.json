@@ -116,6 +116,18 @@
                     "type": "string",
                     "default": "rellink",
                     "help_text": "how to stage output files from work dir into results dir\n\nchoose \"rellink\", \"symlink\", \"move\" or \"copy\" "
+                },
+                "email": {
+                    "type": "string",
+                    "format": "directory-path",
+                    "default": "",
+                    "fa_icon": "fa-solid fa-envelope-circle-check"
+                },
+                "email_on_fail": {
+                    "type": "string",
+                    "format": "directory-path",
+                    "default": "",
+                    "fa_icon": "fa-solid fa-envelope-dot"
                 }
             }
         }

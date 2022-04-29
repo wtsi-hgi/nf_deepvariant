@@ -49,7 +49,7 @@ workflow {
     emit:
     deepvariant_out = deepvariant.out
 }
-
+/*
 workflow.onError {
     log.info "Pipeline execution stopped with the following message: ${workflow.errorMessage}" }
 workflow.onComplete {
@@ -57,3 +57,23 @@ workflow.onComplete {
     log.info "Command line: $workflow.commandLine"
     log.info "Execution status: ${ workflow.success ? 'OK' : 'failed' }"
 }
+*/
+/*
+========================================================================================
+    COMPLETION EMAIL AND SUMMARY
+========================================================================================
+*/
+
+workflow.onComplete {
+
+    if (params.email_on_complete || params.email_on_fail) {
+        NfcoreTemplate.email(workflow, params, summary_params, projectDir, log, multiqc_report)
+    }
+    NfcoreTemplate.summary(workflow, params, log)
+}
+
+/*
+========================================================================================
+    THE END
+========================================================================================
+*/
