@@ -1,8 +1,8 @@
 {
     "$schema": "http://json-schema.org/draft-07/schema",
     "$id": "https://raw.githubusercontent.com/./master/nextflow_schema.json",
-    "title": ". pipeline parameters",
-    "description": "",
+    "title": "Deep Variant parameters",
+    "description": "lore ipsum",
     "type": "object",
     "definitions": {
         "input_output_options": {
