@@ -16,7 +16,7 @@
             "properties": {
                 "tsv_file": {
                     "type": "string",
-                    "default": "/Users/en6/projects/nf_deep/data/input_bams.tsv",
+                    "default": "${projectDir}/data/input_bams.tsv",
                     "help_text": "specify input bam (or cram) files in tab-delimited input file:\n3 columns required: sample, object (path to cram or bam file) and object_index (index .crai or .bai)\n\ne.g:   sample\t    object  \tobject_index"
                 },
                 "samples_to_process": {
@@ -59,7 +59,7 @@
                 "reportdir": {
                     "type": "string",
                     "format": "directory-path",
-                    "default": "/Users/en6/projects/nf_deep/reports",
+                    "default": "${outdir}/reports",
                     "fa_icon": "fas fa-folder-open"
                 }
             }
