@@ -4,7 +4,7 @@ params {
     // e.g:
     // sample	object	object_index
     //PD42171b	/lustre/path_to/PD42171b.sample.dupmarked.bam	/lustre/path_to/PD42171b.sample.dupmarked.bam.bai
-    tsv_file = "${projectDir}/../../input_bams.tsv"
+    tsv_file = "${projectDir}/data/input_bams.tsv"
 
     // how many samples from input tsv file to process
     // -1 for all samples 
