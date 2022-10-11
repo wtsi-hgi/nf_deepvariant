@@ -1,0 +1,175 @@
+{
+    "$schema": "http://json-schema.org/draft-07/schema",
+    "$id": "https://raw.githubusercontent.com/./master/nextflow_schema.json",
+    "title": "Haplotype Calling using GATK and/or DeepVariant parameters",
+    "description": "Pipeline that can pre-process CRAMS and Call Variants",
+    "type": "object",
+    "definitions": {
+        "input_output_options": {
+            "title": "Input/output options",
+            "type": "object",
+            "fa_icon": "fas fa-terminal",
+            "description": "Define where the pipeline should find input data and save output data.",
+            "required": [
+                "outdir"
+            ],
+            "properties": {
+                "study_id_mode": {
+                    "type": "object",
+                    "properties": {
+                         "input_studies": {
+                              "type": "integer",
+                              "title": "Study ID",
+                              "default": "3342",
+                              "help_text": "specify the iRODS study_id from which to query for CRAM files"
+                          },
+                         "exclude_samples_file": {
+                              "type": "string",
+                              "format": "directory-path",   
+                              "title": "File of Samples to exclude",
+                              "default": "${workDir}/data/null.txt",
+                              "help_text": "File of Sample names to exclude, one per line"
+                          },
+                         "run_imeta_study": {
+                              "type": "boolean",
+                              "title": "imeta query of full study",
+                              "default": "false",
+                              "help_text": "This queries iRODs solely using study_id"
+                          },
+                         "run_imeta_study_lanes": {
+                              "type": "boolean",
+                              "title": "imeta query of specific lanes within study",
+                              "default": "false",
+                              "help_text": "This queries iRODs using study_id plus specified run ids"
+                          }
+                     }
+                },
+                "tsv_file": {
+                    "type": "string",
+                    "default": "${workDir}/data/input_bams.tsv",
+                    "help_text": "specify input bam (or cram) files in tab-delimited input file:\n3 columns required: sample, object (path to cram or bam file) and object_index (index .crai or .bai)\n\ne.g:   sample\t    object  \tobject_index"
+                },
+                "samples_to_process": {
+                    "type": "integer",
+                    "default": -1,
+                    "help_text": "how many samples from input tsv file to process\n -1 for all samples "
+                },
+                "ref_dir": {
+                    "type": "string",
+                    "format": "directory-path",
+                    "default": "/lustre/scratch118/humgen/resources/ref/Homo_sapiens/HS38DH",
+                    "fa_icon": "fas fa-folder-open"
+                },
+                "ref_file": {
+                    "type": "string",
+                    "default": "hs38DH.fa",
+                    "help_text": "path to genome ref file, relative to ref_dir/"
+                },
+                "bed_dir": {
+                    "type": "string",
+                    "format": "directory-path",
+                    "default": "/lustre/scratch118/humgen/resources/exome/Homo_sapiens"
+                },
+                "bed_file_deepvariant": {
+                    "type": "string",
+                    "default": "Twist/Twist_Human_Core_Exome_BI-CTR_padded_merged.bed",
+                    "help_text": "path to bed files, relative to bed_dir/"
+                },
+                "bed_file_gatk": {
+                    "type": "string",
+                    "default": "Twist/Twist_Human_Core_Exome_BI-CTR_padded_merged.interval_list",
+                    "help_text": "path to bed files, relative to bed_dir/"
+                },
+                "cram_output_dir": {
+                    "type": "string",
+                    "default": "${workDir}/crams",
+                    "format": "directory-path",
+                    "description": "The output directory where the pre-processed CRAM files will be copied",
+                    "fa_icon": "fas fa-folder-open"
+                },
+                "haplotypecaller_output_dir": {
+                    "type": "string",
+                    "default": "${workDir}/gatk/gvcf",
+                    "format": "directory-path",
+                    "description": "The output directory where the GATK gVCF files will be copied",
+                    "fa_icon": "fas fa-folder-open"
+                },
+                "deepvariant_output_dir": {
+                    "type": "string",
+                    "default": "${workDir}/dv_gln",
+                    "description": "The output directory where the DV gVCF and VCF files will be copied",
+                    "format": "directory-path",
+                    "description": "The output directory where the results will be saved. You have to use absolute paths to storage on Cloud infrastructure.",
+                    "fa_icon": "fas fa-folder-open"
+                },
+                "outdir": {
+                    "type": "string",
+                    "format": "directory-path",
+                    "description": "The output directory where the results will be saved. You have to use absolute paths to storage on Cloud infrastructure.",
+                    "fa_icon": "fas fa-folder-open"
+                },
+                "reportdir": {
+                    "type": "string",
+                    "format": "directory-path",
+                    "default": "${outdir}/reports",
+                    "fa_icon": "fas fa-folder-open"
+                }
+            }
+        },
+        "generic_options": {
+            "title": "Generic options",
+            "type": "object",
+            "fa_icon": "fas fa-file-import",
+            "description": "Less common options for the pipeline, here is where to defined which steps to run",
+            "properties": {
+                "run_mode": {
+                    "type": "string",
+                    "default": "tsv_file",
+                    "enum": ["tsv_file", "study_id"],
+                    "help_text": "must be one of\n\n\"study_id\" \"tsv_file\""
+                },
+                "run_sort_cram": {
+                    "type": "boolean",
+                    "default": true
+                },
+                "remap": {
+                    "type": "boolean",
+                    "default": false
+                },
+                "run_markDuplicates": {
+                    "type": "boolean",
+                    "default": true
+                },
+                "run_coord_sort_cram": {
+                    "type": "boolean",
+                    "default": true
+                },
+                "run_deepvariant": {
+                    "type": "boolean",
+                    "default": true
+                },
+                "run_haplotypecaller": {
+                    "type": "boolean",
+                    "default": true
+                },
+                "copy_mode": {
+                    "type": "string",
+                    "default": "rellink",
+                    "help_text": "how to stage output files from work dir into results dir\n\nchoose \"rellink\", \"symlink\", \"move\" or \"copy\" "
+                },
+                "email": {
+                    "type": "string",
+                    "format": "directory-path",
+                    "default": "",
+                    "fa_icon": "fa-solid fa-envelope-circle-check"
+                },
+                "email_on_fail": {
+                    "type": "string",
+                    "format": "directory-path",
+                    "default": "",
+                    "fa_icon": "fa-solid fa-envelope-dot"
+                }
+            }
+        }
+    }
+}
